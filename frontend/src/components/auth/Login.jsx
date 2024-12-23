@@ -32,7 +32,7 @@ const Login = () => {
             dispatch(setLoading(true));
             const res = await axios.post(`${USER_API_END_POINT}/login`, input, {
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
                 },
                 withCredentials: true,
             });
@@ -42,12 +42,15 @@ const Login = () => {
                 toast.success(res.data.message);
             }
         } catch (error) {
-            console.log(error);
-            toast.error(error.response.data.message);
+            console.error("Error during login:", error); // Debug log
+            const errorMessage = error.response?.data?.message || "An unexpected error occurred.";
+            toast.error(errorMessage);
         } finally {
             dispatch(setLoading(false));
         }
-    }
+    };
+    
+    
     useEffect(()=>{
         if(user){
             navigate("/");

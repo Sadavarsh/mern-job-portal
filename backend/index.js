@@ -9,17 +9,18 @@ import jobRoute from "./routes/job.route.js";
 import applicationRoute from "./routes/application.route.js";
 import path from "path";
 dotenv.config({});
-
+connectDB();
 const app = express();
 
 const _dirname = path.resolve();
+
 
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 const corsOptions = {
-    origin:'https://mern-job-portal-uj55.onrender.com',
+    origin:'http://localhost:5173',
     credentials:true
 }
 
@@ -35,12 +36,11 @@ app.use("/api/v1/job", jobRoute);
 app.use("/api/v1/application", applicationRoute);
 
 app.use(express.static(path.join(_dirname, "/frontend/dist")));
-
-app.get('*', (req, resp) => {
+app.get('*', (req,resp) => {
     resp.sendFile(path.resolve(_dirname, "frontend", "dist", "index.html"))
 })
 
 app.listen(PORT,()=>{
-    connectDB();
+   
     console.log(`Server running at port ${PORT}`);
 })
