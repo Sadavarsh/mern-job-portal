@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 const corsOptions = {
-    origin:'https://mern-job-portal-kappa.vercel.app/',
+    origin:'https://mern-job-portal-uj55.onrender.com',
     credentials:true
 }
 
